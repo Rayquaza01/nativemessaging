@@ -2,3 +2,6 @@
 *.swo
 Thumbs.db
 __pycache__/
+*.pyc
+/dist/
+*.egg-info

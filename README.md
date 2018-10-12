@@ -1,5 +1,5 @@
 # nativemessaging
-A python package for interfacing with native messaging in webextensions
+A Python package for interfacing with Native Messaging in WebExtensions
 
 [See Native Messaging on MDN](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Native_messaging)
 
@@ -44,3 +44,39 @@ while True:
     if message == "hello":
         nativemessaging.send_message(nativemessaging.encode_message("world"))
 ```
+
+## nativemessaging-install
+`nativemessaging-install` is a command line script provided with the package.
+
+### Arguments
+`nativemessaging-install browser [--manifest manifest]`
+ * `browser` - positional argument, 1 or more parameters. Must be `chrome` or `firefox`.
+ * `--manifest` - a path to a manifest file to use for installing.
+
+### manifest-install.json
+A `native-manifest.json` file is expected in the current working directory when running the script, unless `--manifest` is passsed.
+The format must be similar to the native manifest format for Chrome or Firefox, with two main differences:
+ * `path` must be a relative path to the native app in relation to your current working directory.
+ * Both `allowed_extensions` and `allowed_origins` must be in the manifest to work with both Chrome and Firefox.
+```json
+{
+    "name": "application_name",
+    "description": "description",
+    "path": "application_name.py",
+    "type": "stdio",
+    "allowed_extensions": ["extension@id"],
+    "allowed_origins": ["chrome-extension://extension-id"]
+}
+```
+
+### Created files
+On Windows, it will create `<application_name>_firefox.json` and `<application_name>_chrome.json` in the same directory as `<path>`.  
+A batch file will also be created for python apps on Windows.  
+A registry key is created at `HKEY_CURRENT_USER\Software\Google\Chrome\NativeMessagingHosts\<application_name>` or `HKEY_CURRENT_USER\Software\Mozilla\NativeMessagingHosts\<application_name>`
+
+On linux, it will create `~/.config/google-chrome/NativeMessagingHosts/<application_name>.json` or `~/.mozilla/native-messaging-hosts/<application_name>.json`
+
+On mac, it will create `~/Library/Application Support/Google/Chrome/NativeMessagingHosts/<application_name>.json` or `~/Library/Application Support/Mozilla/NativeMessagingHosts/<application_name>.json`
+
+#### See also:
+ * [Native Messaging on Chrome Docs](https://developer.chrome.com/extensions/nativeMessaging)
