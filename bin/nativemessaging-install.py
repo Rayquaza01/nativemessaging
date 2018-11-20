@@ -85,7 +85,10 @@ def main():
     if sys.platform in ["linux", "darwin"]:  # save manifest in linux and mac
         for browser in opts["browser"]:
             manifest_path = os.path.join(browser_info[browser][sys.platform],
-                                         manifest["name"])
+                                         manifest["name"] + ".json")
+            manifest_path_folder = os.path.dirname(manifest_path)
+            if not os.path.exists(manifest_path_folder):
+                os.mkdir(manifest_path_folder)
             writeManifest(browser, manifest_path, manifest)
     input("Done! Press enter or close the window.")
 
