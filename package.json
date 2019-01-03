@@ -1,0 +1,21 @@
+{
+    "name": "nativemessaging",
+    "version": "1.0.1",
+    "description": "A package with basic native messaging apis for webextensions",
+    "main": "index.json",
+    "scripts": {
+        "build": "python3 setup.py sdist bdist_wheel",
+        "upload:test": "twine upload --repository-url https://test.pypi.org/legacy/ dist/*",
+        "upload": "twine upload dist/*"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Rayquaza01/nativemessaging.git"
+    },
+    "author": "Rayquaza01",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Rayquaza01/nativemessaging/issues"
+    },
+    "homepage": "https://github.com/Rayquaza01/nativemessaging#readme"
+}
