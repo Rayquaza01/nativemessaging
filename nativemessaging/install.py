@@ -102,7 +102,7 @@ def main():
         manifest_file = opts["manifest"]
     elif os.path.isfile("native-manifest.json"):
         # fall back to native-manifest.json
-        print("Reading manifest: native-manifest.json")
+        pass
     else:
         raise Exception("No manifest found. Supply a manifest in the arguments, or create a manifest named native-manifest.json")
 
