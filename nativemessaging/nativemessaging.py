@@ -5,11 +5,17 @@ import sys
 import struct
 
 def log_browser_console(message):
+    '''
+    Log a message in the browser console
+    '''
     sys.stderr.write(message + '\n')
 
 
 # from https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Native_messaging
 def get_message():
+    '''
+    Receive a native message from the browser
+    '''
     raw_length = sys.stdin.buffer.read(4)
     if len(raw_length) == 0:
         raise Exception("Message is empty")
@@ -18,8 +24,10 @@ def get_message():
     return json.loads(message)
 
 
-# Send an encoded message to stdout.
 def send_message(message):
+    '''
+    Send a native message to the browser
+    '''
     encoded_content = json.dumps(message).encode("utf-8")
     encoded_length = struct.pack("@I", len(encoded_content))
     sys.stdout.buffer.write(encoded_length)
