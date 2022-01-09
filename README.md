@@ -12,12 +12,8 @@ Based on [Native Messaging on MDN](https://developer.mozilla.org/en-US/docs/Mozi
 If [`runtime.connectNative`](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/runtime/connectNative) is used, `get_message()` must be called repeatedly in a loop to poll for messages.  
 If [`runtime.sendNativeMessage`](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/runtime/sendNativeMessage) is used, `get_message()` only needs to be called once.
 
-## `encode_message( message_content )`
-`nativemessaging.encode_message()` takes one argument, a message to be encoded.  
-Returns an encoded version of a message to be returned to the browser. Use with `send_message()`.
-
-## `send_message( encoded_message )`
-`nativemessaging.send_message()` takes one argument, an encoded message from `encode_message()`. Returns a message to the browser.
+## `send_message( message )`
+`nativemessaging.send_message()` takes one argument, a message to be returned to the browser.
 
 ## Sample
 Browser side:
@@ -42,7 +38,7 @@ import nativemessaging
 while True:
     message = nativemessaging.get_message()
     if message == "hello":
-        nativemessaging.send_message(nativemessaging.encode_message("world"))
+        nativemessaging.send_message("world")
 ```
 
 ## nativemessaging-install

@@ -18,15 +18,10 @@ def get_message():
     return json.loads(message)
 
 
-# Encode a message for transmission, given its content.
-def encode_message(message_content):
-    encoded_content = json.dumps(message_content).encode("utf-8")
-    encoded_length = struct.pack("@I", len(encoded_content))
-    return {"length": encoded_length, "content": encoded_content}
-
-
 # Send an encoded message to stdout.
-def send_message(encoded_message):
-    sys.stdout.buffer.write(encoded_message["length"])
-    sys.stdout.buffer.write(encoded_message["content"])
+def send_message(message):
+    encoded_content = json.dumps(message).encode("utf-8")
+    encoded_length = struct.pack("@I", len(encoded_content))
+    sys.stdout.buffer.write(encoded_length)
+    sys.stdout.buffer.write(encoded_content)
     sys.stdout.buffer.flush()
