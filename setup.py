@@ -14,7 +14,9 @@ setup(name="nativemessaging",
       author_email="rayquaza01@outlook.com",
       license="MPL 2.0",
       packages=["nativemessaging"],
-      scripts=["bin/nativemessaging-install.py"],
+      entry_points={
+          "console_scripts": ["nativemessaging-install = nativemessaging.install:main"]
+      },
       include_package_data=True,
       package_data={"": ["README.md"]},
       classifiers=[
