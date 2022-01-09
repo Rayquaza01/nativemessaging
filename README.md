@@ -15,6 +15,9 @@ If [`runtime.sendNativeMessage`](https://developer.mozilla.org/en-US/docs/Mozill
 ## `send_message( message )`
 `nativemessaging.send_message()` takes one argument, a message to be returned to the browser.
 
+## `install( browsers, manifest_file )`
+`nativemessaging.install()` takes two arguments, a list of browsers to install the manifest and a manifest filename. Supported browsers are 'chrome' and 'firefox'.
+
 ## Sample
 Browser side:
 ```javascript
