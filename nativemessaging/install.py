@@ -21,6 +21,10 @@ browser_info = {
     }
 }
 
+def read_file(filename):
+    with open(filename, "r") as f:
+        return f.read()
+
 
 def write_file(filename, contents):
     with open(filename, "w") as f:
@@ -69,13 +73,7 @@ def install_unix(browsers, manifest):
         write_manifest(browser, manifest_path, manifest)
 
 
-def install(browsers, manifest_file):
-    # read contents of manifest file
-    manifest_contents = None
-    with open(manifest_file, "r") as f:
-        manifest_contents = f.read()
-    manifest = json.loads(manifest_contents)
-
+def install(browsers, manifest):
     # ensure path is absolute
     manifest["path"] = os.path.abspath(manifest["path"])
     #print("Absolute path: " + manifest["path"])
@@ -106,8 +104,11 @@ def main():
     else:
         raise Exception("No manifest found. Supply a manifest in the arguments, or create a manifest named native-manifest.json")
 
+    # read contents of manifest file
     print("Reading manifest: " + manifest_file)
+    manifest_contents = read_file(manifest_file)
+    manifest = json.loads(manifest_contents)
 
-    install(opts["browser"], manifest_file)
+    install(opts["browser"], manifest)
 
     input("Done! Press enter or close the window.")
